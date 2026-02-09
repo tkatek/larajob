@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Listing extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     // هذه الدالة تستقبل أمر البحث وتقوم بفلترة النتائج
     public function scopeFilter($query, array $filters)
     {

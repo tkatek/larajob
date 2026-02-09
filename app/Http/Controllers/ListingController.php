@@ -30,7 +30,18 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            'title' => 'required',
+            'company' => ['required', 'unique:listings,company'], // يجب أن يكون اسم الشركة فريداً (مثال فقط)
+            'location' => 'required',
+            'website' => 'required',
+            'email' => ['required', 'email'], // يجب أن يكون صيغة إيميل
+            'tags' => 'required',
+            'description' => 'required'
+        ]);
+
+        Listing::create($formFields);
+        return redirect('/')->with('message', 'Listing created successfully!');
     }
 
     /**
